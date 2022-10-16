@@ -12,21 +12,17 @@ struct linked
 {
 	node* root;
 	long long int size;
-	long long int height;
 	long long int goodChecks = 0;
 	long long int badChecks = 0;
-	long long int toFill = 0;
 	linked()
 	{
 		root = new node();
 		size = 0;
-		height = 0;
 	}
 	linked(string thing)
 	{
 		root = new node(thing);
 		size = 1;
-		height = 0;
 	}
 
 	void placeData(node * tmp, node * base)
@@ -117,19 +113,25 @@ struct linked
 				return true;
 			}
 		}
-		/*for (int i = 0; i < size; i++)
-		{
-			string word = tmp->data;
-			bad++;
-			if (!test.compare(word))
-			{
-				goodChecks= goodChecks + i + 1;
-				return true;
-			}
-			
-		}*/
 		badChecks = badChecks + bad;
 		return false;
+	}
+
+	void remove()
+	{
+		node * tmp = root;
+		while(tmp->left != nullptr && tmp->right != nullptr)
+		{
+			if(tmp->left != nullptr)
+			{
+				tmp = tmp->left;
+			}
+			else if (tmp->right != nullptr)
+			{
+				tmp = tmp ->right;
+			}
+		}
+		delete tmp;
 	}
 
 	long long int getGood()
